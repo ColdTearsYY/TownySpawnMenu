@@ -20,26 +20,26 @@ public class MetadataTowns implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Resident res = TownyAPI.getInstance().getResident((Player)sender);
         assert res != null;
-        if(!sender.hasPermission("townyspawnmenu.set.town") || !sender.hasPermission("townyspawnmenu.set.admin")) { sender.sendMessage("§6[Towny Spawn Menu] §cYou can't do that!"); return false; }
-        if(!res.hasTown()) { sender.sendMessage("§6[Towny Spawn Menu] §cYou aren't in a town!"); return false; }
-        if(!res.isMayor()) { sender.sendMessage("§6[Towny Spawn Menu] §cYou aren't  the mayor of your town!"); return false; }
+        if(!sender.hasPermission("townyspawnmenu.set.town") || !sender.hasPermission("townyspawnmenu.set.admin")) { sender.sendMessage("§6[Towny Spawn Menu] §c你不能这样做！"); return false; }
+        if(!res.hasTown()) { sender.sendMessage("§6[Towny Spawn Menu] §c你不在一个城镇中！"); return false; }
+        if(!res.isMayor()) { sender.sendMessage("§6[Towny Spawn Menu] §c你不是你所在城镇的市长！"); return false; }
 
         Material material;
         try {
             material = Material.valueOf(args[0].replace("minecraft:", "").toUpperCase());
         }catch(IllegalArgumentException e){
-            sender.sendMessage("§6[Towny Spawn Menu] §cPlease provide a valid item or block name!");
-            sender.sendMessage("§cExample: nether_star (Case insensitive, spaces must be replaced by underscores)");
+            sender.sendMessage("§6[Towny Spawn Menu] §c请提供有效的物品或方块名称！");
+            sender.sendMessage("§c示例: nether_star (不区分大小写，空格必须替换为下划线)");
             return false;
         }
 
         if(args.length > 1) {
-            if(!sender.hasPermission("townyspawnmenu.set.admin")) { sender.sendMessage("§4You can't do that!"); return false; }
+            if(!sender.hasPermission("townyspawnmenu.set.admin")) { sender.sendMessage("§4你不能这样做！"); return false; }
             Metadata.setBlockInMenu(Objects.requireNonNull(TownyAPI.getInstance().getTown(args[1])), material.name());
-            sender.sendMessage("§6[Towny Spawn Menu] §3This town's item/block in the menu now is: " + material.name().toLowerCase());
+            sender.sendMessage("§6[Towny Spawn Menu] §3该城镇在菜单中的物品/方块现在是: " + material.name().toLowerCase());
         }else{
             Metadata.setBlockInMenu(Objects.requireNonNull(res.getTownOrNull()), material.name());
-            sender.sendMessage("§6[Towny Spawn Menu] §3Your town's item/block in the menu now is: " + material.name().toLowerCase());
+            sender.sendMessage("§6[Towny Spawn Menu] §3你的城镇在菜单中的物品/方块现在是: " + material.name().toLowerCase());
         }
         return true;
     }

@@ -1,5 +1,5 @@
 name: TownySpawnMenu
-description: This plugin adds a browsable menu to teleport to other towns in Towny
+description: 此插件添加了一个可浏览的菜单，用于传送到 Towny 中的其他城镇
 author: Cocolennon
 main: me.senkoco.townyspawnmenu.Main
 version: 1.3.1
@@ -9,43 +9,43 @@ depend: [Towny]
 softdepend: [TownyMenus]
 commands:
   townyspawnmenu:
-    description: Main command for usage of the plugin
+    description: 插件的主要使用命令
     aliases: tsm
 permissions:
   townyspawnmenu.set.*:
-    description: All set permissions (Including admin permissions)
+    description: 所有设置权限（包括管理员权限）
     children:
       townyspawnmenu.set.town: true
       townyspawnmenu.set.nation: true
       townyspawnmenu.set.admin: true
   townyspawnmenu.set.town:
-    description: Allows a user to set their town's item (Mayors only)
+    description: 允许用户设置其城镇的物品（仅限市长）
     default: true
   townyspawnmenu.set.nation:
-    description: Allows a user to set their nation's item (Kings only)
+    description: 允许用户设置其国家的物品（仅限国王）
     default: true
   townyspawnmenu.set.default:
-    description: Allows a user to set the default item for towns and nations that haven't set their item
+    description: 允许用户为尚未设置物品的城镇和国家设置默认物品
   townyspawnmenu.set.admin:
-    description: Allows a user to set any town or nation's item
+    description: 允许用户设置任何城镇或国家的物品
   townyspawnmenu.menu.*:
-    description: All menu permissions
+    description: 所有菜单权限
     children:
       townyspawnmenu.menu.open: true
       townyspawnmenu.menu.teleport: true
   townyspawnmenu.menu.open:
-    description: Allows a user to open the menu
+    description: 允许用户打开菜单
     default: true
   townyspawnmenu.menu.teleport:
-    description: Allows a user to teleport to a town through the menu
+    description: 允许用户通过菜单传送到城镇
     default: true
   townyspawnmenu.admin:
-    description: Grants all admin permissions
+    description: 授予所有管理员权限
     children:
       townyspawnmenu.set.admin: true
       townyspawnmenu.set.default: true
   townyspawnmenu.*:
-    description: Grants all permissions
+    description: 授予所有权限
     children:
       townyspawnmenu.menu.*: true
       townyspawnmenu.set.*: true

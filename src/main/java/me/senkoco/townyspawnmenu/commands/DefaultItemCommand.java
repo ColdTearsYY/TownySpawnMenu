@@ -17,19 +17,19 @@ public class DefaultItemCommand implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(!sender.hasPermission("townyspawnmenu.set.default")) { sender.sendMessage("§6[Towny Spawn Menu] §cYou can't do that!"); return false; }
+        if(!sender.hasPermission("townyspawnmenu.set.default")) { sender.sendMessage("§6[Towny Spawn Menu] §c你不能这样做！"); return false; }
 
         Material material;
         try {
             material = Material.valueOf(args[0].replace("minecraft:", "").toUpperCase());
         }catch(IllegalArgumentException e){
-            sender.sendMessage("§6[Towny Spawn Menu] §cPlease provide a valid item or block name!");
-            sender.sendMessage("§cExample: nether_star (Case insensitive, spaces must be replaced by underscores)");
+            sender.sendMessage("§6[Towny Spawn Menu] §c请提供有效的物品或方块名称！");
+            sender.sendMessage("§c示例: nether_star (不区分大小写，空格必须替换为下划线)");
             return false;
         }
         plugin.getConfig().set("menu.defaultItem", material.name());
         plugin.saveConfig();
-        sender.sendMessage("§6[Towny Spawn Menu] §3The default item for towns and nations in the menu now is: " + args[0].replace("minecraft:", ""));
+        sender.sendMessage("§6[Towny Spawn Menu] §3菜单中城镇和国家的默认物品现在是: " + args[0].replace("minecraft:", ""));
         return true;
     }
 

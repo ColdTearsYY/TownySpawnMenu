@@ -19,26 +19,26 @@ public class MetadataNations implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Resident res = TownyAPI.getInstance().getResident((Player)sender);
         assert res != null;
-        if(!sender.hasPermission("townyspawnmenu.set.nation") || !sender.hasPermission("townyspawnmenu.set.admin")) { sender.sendMessage("§6[Towny Spawn Menu] §cYou can't do that!"); return false; }
-        if(!res.hasNation()) { sender.sendMessage("§6[Towny Spawn Menu] §cYou aren't in a nation!"); return false; }
-        if(!res.isKing()) { sender.sendMessage("§6[Towny Spawn Menu] §cYou aren't the king of your nation!"); return false; }
+        if(!sender.hasPermission("townyspawnmenu.set.nation") || !sender.hasPermission("townyspawnmenu.set.admin")) { sender.sendMessage("§6[Towny Spawn Menu] §c你不能这样做！"); return false; }
+        if(!res.hasNation()) { sender.sendMessage("§6[Towny Spawn Menu] §c你不在一个国家中！"); return false; }
+        if(!res.isKing()) { sender.sendMessage("§6[Towny Spawn Menu] §c你不是你所在国家的国王！"); return false; }
 
         Material material;
         try {
             material = Material.valueOf(args[0].replace("minecraft:", "").toUpperCase());
         }catch(IllegalArgumentException e){
-            sender.sendMessage("§6[Towny Spawn Menu] §cPlease provide a valid item or block name!");
-            sender.sendMessage("§cExample: nether_star (Case insensitive)");
+            sender.sendMessage("§6[Towny Spawn Menu] §c请提供有效的物品或方块名称！");
+            sender.sendMessage("§c示例: nether_star (不区分大小写)");
             return false;
         }
 
         if(args.length > 1) {
-            if(!sender.hasPermission("townyspawnmenu.set.admin")) { sender.sendMessage("§4You can't do that!"); return false; }
+            if(!sender.hasPermission("townyspawnmenu.set.admin")) { sender.sendMessage("§4你不能这样做！"); return false; }
             Metadata.setBlockInMenu(Objects.requireNonNull(TownyAPI.getInstance().getNation(args[1])), material.name());
-            sender.sendMessage("§6[Towny Spawn Menu] §3This nation's item/block in the menu now is: " + material.name().toLowerCase());
+            sender.sendMessage("§6[Towny Spawn Menu] §3该国家在菜单中的物品/方块现在是: " + material.name().toLowerCase());
         }else{
             Metadata.setBlockInMenu(Objects.requireNonNull(res.getNationOrNull()), material.name());
-            sender.sendMessage("§6[Towny Spawn Menu] §3Your nation's item/block in the menu now is: " + material.name().toLowerCase());
+            sender.sendMessage("§6[Towny Spawn Menu] §3你的国家在菜单中的物品/方块现在是: " + material.name().toLowerCase());
         }
         return true;
     }

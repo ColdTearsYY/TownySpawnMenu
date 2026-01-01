@@ -13,7 +13,7 @@ public class onPlayerJoinEvent implements Listener {
 
         if(!player.hasPermission("townyspawnui.*")) return;
         if(Main.getUsingOldVersion()){
-            player.sendMessage("§6[Towny Spawn Menu] §3You are using an older version of Towny Spawn Menu, please update to version " + Main.getLatestVersion());
+            player.sendMessage("§6[Towny Spawn Menu] §3您正在使用旧版本的 Towny Spawn Menu，请更新到版本 " + Main.getLatestVersion());
         }
     }
 }

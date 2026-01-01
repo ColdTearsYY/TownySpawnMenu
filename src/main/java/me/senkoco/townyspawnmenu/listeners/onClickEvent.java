@@ -51,10 +51,10 @@ public class onClickEvent implements Listener {
                 }
             case "townMenu":
                 if(currentLName.equals("townMenu") || currentLName.equals("hiddenTown")) return;
-                if(currentDName.equals("§6§lNext Page") || currentDName.equals("§6§lPrevious Page") || currentDName.equals("§6§lBack to Nations")){
+                if(currentDName.equals("§6§l下一页") || currentDName.equals("§6§l上一页") || currentDName.equals("§6§l返回国家列表")){
                     Nations.openTownsOfNation(current, player, true, TownyAPI.getInstance().getNation(Objects.requireNonNull(Objects.requireNonNull(inv.getItem(26)).getItemMeta()).getPersistentDataContainer().get(buttonAction, PersistentDataType.STRING)));
                 }else{
-                    if(!player.hasPermission("townyspawnmenu.menu.teleport")) { player.sendMessage("§6[Towny Spawn Menu] §cYou can't do that!"); return; }
+                    if(!player.hasPermission("townyspawnmenu.menu.teleport")) { player.sendMessage("§6[Towny Spawn Menu] §c你不能这样做！"); return; }
                     Towns.teleportToTown(player, currentLName);
                 }
         }

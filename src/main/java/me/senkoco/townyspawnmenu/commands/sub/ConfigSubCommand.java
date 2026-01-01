@@ -13,17 +13,17 @@ public class ConfigSubCommand {
 
     public static boolean execute(Player player, String[] args) {
         if(args.length == 1) {
-            player.sendMessage("§6[Towny Spawn Menu] §cYou have to provide an option!");
+            player.sendMessage("§6[Towny Spawn Menu] §c你必须提供一个选项！");
             return false;
         }else if(args.length == 2) {
-            player.sendMessage("§6[Towny Spawn Menu] §cYou must provide an item!");
+            player.sendMessage("§6[Towny Spawn Menu] §c你必须提供一个物品！");
             return false;
         }
         String option = args[1].toLowerCase();
         String itemName = args[2].replace("minecraft:", "").toUpperCase();
         Material item = Material.getMaterial(itemName.toUpperCase());
         if(item == null) {
-            player.sendMessage("§6[Towny Spawn Menu] §cYou must provide a valid item!\");");
+            player.sendMessage("§6[Towny Spawn Menu] §c你必须提供一个有效的物品！");
             return false;
         }
 
@@ -31,35 +31,35 @@ public class ConfigSubCommand {
             case "default-item" -> {
                 instance.getConfig().set("menu.defaultItem", itemName);
                 instance.saveConfig();
-                player.sendMessage("§6[Towny Spawn Menu] §3Successfully set the default item for towns!");
+                player.sendMessage("§6[Towny Spawn Menu] §3成功设置城镇的默认物品！");
                 return true;
             }
             case "menu-filler" -> {
                 instance.getConfig().set("menu.menuFiller", itemName);
                 instance.saveConfig();
-                player.sendMessage("§6[Towny Spawn Menu] §3Successfully set the item to fill in the empty space!");
+                player.sendMessage("§6[Towny Spawn Menu] §3成功设置用于填充空白空间的物品！");
                 return true;
             }
             case "war-item" -> {
                 instance.getConfig().set("menu.warItem", itemName);
                 instance.saveConfig();
-                player.sendMessage("§6[Towny Spawn Menu] §3Successfully set the item for towns at war!");
+                player.sendMessage("§6[Towny Spawn Menu] §3成功设置处于战争状态的城镇的物品！");
                 return true;
             }
             case "no-nation" -> {
                 instance.getConfig().set("menu.noNationItem", itemName);
                 instance.saveConfig();
-                player.sendMessage("§6[Towny Spawn Menu] §3Successfully set the item for towns which don't have a nation!");
+                player.sendMessage("§6[Towny Spawn Menu] §3成功设置没有国家的城镇的物品！");
                 return true;
             }
             case "private" -> {
                 instance.getConfig().set("menu.privateItem", itemName);
                 instance.saveConfig();
-                player.sendMessage("§6[Towny Spawn Menu] §3Successfully set the item for private towns!");
+                player.sendMessage("§6[Towny Spawn Menu] §3成功设置私有城镇的物品！");
                 return true;
             }
             default -> {
-                player.sendMessage("§6[Towny Spawn Menu] §cYou have to provide a valid option!");
+                player.sendMessage("§6[Towny Spawn Menu] §c你必须提供一个有效的选项！");
                 return false;
             }
         }

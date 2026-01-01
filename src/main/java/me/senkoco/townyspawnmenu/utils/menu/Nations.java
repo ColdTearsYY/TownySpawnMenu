@@ -26,9 +26,9 @@ import static org.bukkit.Bukkit.getPluginManager;
 
 public class Nations {
     static Plugin plugin = getPluginManager().getPlugin("TownySpawnMenu");
-    public static ItemStack noNation = General.getItem(Material.getMaterial(Main.getInstance().getConfig().getString("menu.noNationItem")), "§c§lNation-less Towns", "noNation");
-    public static ItemStack notPublic = General.getItem(Material.getMaterial(Main.getInstance().getConfig().getString("menu.privateItem")), "§c§lPrivate Towns", "notPublic");
-    public static ItemStack atWar = General.getItem(Material.getMaterial(Main.getInstance().getConfig().getString("menu.warItem")), "§c§lTowns at War", "atWar");
+    public static ItemStack noNation = General.getItem(Material.getMaterial(Main.getInstance().getConfig().getString("menu.noNationItem")), "§c§l无国家城镇", "noNation");
+    public static ItemStack notPublic = General.getItem(Material.getMaterial(Main.getInstance().getConfig().getString("menu.privateItem")), "§c§l私有城镇", "notPublic");
+    public static ItemStack atWar = General.getItem(Material.getMaterial(Main.getInstance().getConfig().getString("menu.warItem")), "§c§l战争中的城镇", "atWar");
 
     public static List<Inventory> getPages(Resident res){
         List<Nation> allNations = new LinkedList<>(TownyAPI.getInstance().getNations());
@@ -39,7 +39,7 @@ public class Nations {
         List<Inventory> inventories = new LinkedList<>();
 
         for(int pageNumber = 0; pageNumber <= getPagesCount(allNationsCount); pageNumber++){
-            Inventory newPage = Bukkit.createInventory(null, 27, "§6§lTowny§f§l: §3Nations (" + (pageNumber+1) + "/" + (getPagesCount(allNationsCount)+1) + ")");
+            Inventory newPage = Bukkit.createInventory(null, 27, "§6§lTowny§f§l: §3国家 (" + (pageNumber+1) + "/" + (getPagesCount(allNationsCount)+1) + ")");
             List<Nation> nationsInCurrentPage = new LinkedList<>();
             if(pageNumber == getPagesCount(allNationsCount)) inventorySlots = allNationsCount - nationsCount;
             for(int i = 0; i < inventorySlots; i++){
@@ -50,7 +50,7 @@ public class Nations {
             for (Nation nation : nationsInCurrentPage) {
                 if(Metadata.getNationHidden(nation)) {
                     if(!nation.hasResident(res)) {
-                        newPage.setItem(menuSlot, General.getItem(Material.RED_STAINED_GLASS_PANE, "§c§lHidden Nation", "hiddenNation"));
+                        newPage.setItem(menuSlot, General.getItem(Material.RED_STAINED_GLASS_PANE, "§c§l隐藏国家", "hiddenNation"));
                         menuSlot++;
                         continue;
                     }
@@ -67,12 +67,12 @@ public class Nations {
             addAtWarItem(newPage);
             if(getPagesCount(allNationsCount) > 0){
                 if(pageNumber == 0){
-                    newPage.setItem(23, General.getItem(Material.ARROW, "§6§lNext Page", String.valueOf((pageNumber + 1))));
+                    newPage.setItem(23, General.getItem(Material.ARROW, "§6§l下一页", String.valueOf((pageNumber + 1))));
                 }else if(pageNumber == getPagesCount(allNationsCount)){
-                    newPage.setItem(21, General.getItem(Material.ARROW, "§6§lPrevious Page", String.valueOf(pageNumber - 1)));
+                    newPage.setItem(21, General.getItem(Material.ARROW, "§6§l上一页", String.valueOf(pageNumber - 1)));
                 }else{
-                    newPage.setItem(23, General.getItem(Material.ARROW, "§6§lNext Page", String.valueOf(pageNumber + 1)));
-                    newPage.setItem(21, General.getItem(Material.ARROW, "§6§lPrevious Page", String.valueOf(pageNumber - 1)));
+                    newPage.setItem(23, General.getItem(Material.ARROW, "§6§l下一页", String.valueOf(pageNumber + 1)));
+                    newPage.setItem(21, General.getItem(Material.ARROW, "§6§l上一页", String.valueOf(pageNumber - 1)));
                 }
             }
             //if(getServer().getPluginManager().getPlugin("TownyMenus") != null) newPage.setItem(22, General.getItem(Material.ARROW, "§6§lBack to Towny Menus", "BTTM"));
@@ -84,10 +84,10 @@ public class Nations {
 
     public static ArrayList<String> setGlobalLore(Nation nation){
         ArrayList<String> itemlore = new ArrayList<>();
-        itemlore.add("§6§lLeader§f§l: §3" + nation.getKing().getName());
-        itemlore.add("§6§lCapital§f§l: §2" + nation.getCapital().getName());
-        itemlore.add("§6§lTowns§f§l: §9" + nation.getTowns().size());
-        itemlore.add("§6§lTotal Residents§f§l: §d" + nation.getResidents().size());
+        itemlore.add("§6§l领袖§f§l: §3" + nation.getKing().getName());
+        itemlore.add("§6§l首都§f§l: §2" + nation.getCapital().getName());
+        itemlore.add("§6§l城镇§f§l: §9" + nation.getTowns().size());
+        itemlore.add("§6§l总居民§f§l: §d" + nation.getResidents().size());
         return itemlore;
     }
 
@@ -118,7 +118,7 @@ public class Nations {
         PersistentDataContainer pdc = current.getItemMeta().getPersistentDataContainer();
         String currentLName = pdc.get(buttonAction, PersistentDataType.STRING);
         switch (currentDName) {
-            case "§6§lNext Page", "§6§lPrevious Page" -> {
+            case "§6§l下一页", "§6§l上一页" -> {
                 if (!isTownMenu) {
                     General.openInventory(player, Integer.parseInt(currentLName), Nations.getPages(TownyAPI.getInstance().getResident(player)));
                 } else {
@@ -126,7 +126,7 @@ public class Nations {
                 }
                 return;
             }
-            case "§6§lBack to Nations" -> {
+            case "§6§l返回国家列表" -> {
                 General.openInventory(player, Integer.parseInt(currentLName), Nations.getPages(TownyAPI.getInstance().getResident(player)));
                 return;
             }

@@ -47,13 +47,13 @@ public class Towns {
             Inventory newPage;
             if(nation == null) {
                 if(warMenu){
-                    newPage = Bukkit.createInventory(null, 27, "§6§lTowns§f§l: §3At War (" + (pageNumber+1 + "/" + (getPagesCount(allTownsCount)+1) + ")"));
+                    newPage = Bukkit.createInventory(null, 27, "§6§l城镇§f§l: §3战争中 (" + (pageNumber+1 + "/" + (getPagesCount(allTownsCount)+1) + ")"));
                 }else if(privateMenu){
-                    newPage = Bukkit.createInventory(null, 27, "§6§lTowns§f§l: §3Private (" + (pageNumber+1 + "/" + (getPagesCount(allTownsCount)+1) + ")"));
+                    newPage = Bukkit.createInventory(null, 27, "§6§l城镇§f§l: §3私有 (" + (pageNumber+1 + "/" + (getPagesCount(allTownsCount)+1) + ")"));
                 }else{
-                    newPage = Bukkit.createInventory(null, 27, "§6§lTowns§f§l: §3Nation-less (" + (pageNumber+1 + "/" + (getPagesCount(allTownsCount)+1) + ")"));
+                    newPage = Bukkit.createInventory(null, 27, "§6§l城镇§f§l: §3无国家 (" + (pageNumber+1 + "/" + (getPagesCount(allTownsCount)+1) + ")"));
                 }
-            }else{ newPage = Bukkit.createInventory(null, 27, "§6§l" + nation.getName() + "§f§l: §3Towns (" + (pageNumber+1 + "/" + (getPagesCount(allTownsCount)+1) + ")")); }
+            }else{ newPage = Bukkit.createInventory(null, 27, "§6§l" + nation.getName() + "§f§l: §3城镇 (" + (pageNumber+1 + "/" + (getPagesCount(allTownsCount)+1) + ")")); }
             List<Town> townsInCurrentPage = new LinkedList<>();
             if(pageNumber == getPagesCount(allTownsCount)) inventorySlots = allTownsCount - townsInPage;
             for(int j = 0; j < inventorySlots; j++){
@@ -64,7 +64,7 @@ public class Towns {
             for (Town town : townsInCurrentPage) {
                 if(Metadata.getTownHidden(town)) {
                     if(!town.hasResident(res)) {
-                        newPage.setItem(menuSlot, General.getItem(Material.RED_STAINED_GLASS_PANE, "§c§lHidden Town", "hiddenTown"));
+                        newPage.setItem(menuSlot, General.getItem(Material.RED_STAINED_GLASS_PANE, "§c§l隐藏城镇", "hiddenTown"));
                         menuSlot++;
                         continue;
                     }
@@ -78,15 +78,15 @@ public class Towns {
             }
             if(getPagesCount(allTownsCount) > 0){
                 if(pageNumber == 0){
-                    newPage.setItem(23, General.getItem(Material.ARROW, "§6§lNext Page", String.valueOf(pageNumber + 1)));
+                    newPage.setItem(23, General.getItem(Material.ARROW, "§6§l下一页", String.valueOf(pageNumber + 1)));
                 }else if(pageNumber == getPagesCount(allTownsCount)){
-                    newPage.setItem(21, General.getItem(Material.ARROW, "§6§lPrevious Page", String.valueOf(pageNumber - 1)));
+                    newPage.setItem(21, General.getItem(Material.ARROW, "§6§l上一页", String.valueOf(pageNumber - 1)));
                 }else{
-                    newPage.setItem(23, General.getItem(Material.ARROW, "§6§lNext Page", String.valueOf(pageNumber + 1)));
-                    newPage.setItem(21, General.getItem(Material.ARROW, "§6§lPrevious Page", String.valueOf(pageNumber - 1)));
+                    newPage.setItem(23, General.getItem(Material.ARROW, "§6§l下一页", String.valueOf(pageNumber + 1)));
+                    newPage.setItem(21, General.getItem(Material.ARROW, "§6§l上一页", String.valueOf(pageNumber - 1)));
                 }
             }
-            newPage.setItem(22, General.getItem(Material.ARROW, "§6§lBack to Nations", "0"));
+            newPage.setItem(22, General.getItem(Material.ARROW, "§6§l返回国家列表", "0"));
             if(nation == null){
                 if(warMenu){
                     newPage.setItem(26, General.getItem(Material.getMaterial(Main.getInstance().getConfig().getString("menu.menuFiller")), " ", "atWar"));
@@ -107,16 +107,16 @@ public class Towns {
         if(!town.isPublic()) spawnCost = "Private";
 
         ArrayList<String> itemlore = new ArrayList<>();
-        if(town.hasNation()) itemlore.add("§6§lNation§f§l: §3" + Objects.requireNonNull(town.getNationOrNull()).getName());
-        itemlore.add("§6§lMayor§f§l: §2" + town.getMayor().getName());
-        itemlore.add("§6§lResidents§f§l: §d" + town.getResidents().size());
-        itemlore.add("§6§lSpawn Cost§f§l: §c" + spawnCost);
+        if(town.hasNation()) itemlore.add("§6§l国家§f§l: §3" + Objects.requireNonNull(town.getNationOrNull()).getName());
+        itemlore.add("§6§l市长§f§l: §2" + town.getMayor().getName());
+        itemlore.add("§6§l居民§f§l: §d" + town.getResidents().size());
+        itemlore.add("§6§l传送费用§f§l: §c" + spawnCost);
         return itemlore;
     }
 
     public static void teleportToTown(Player player, String townName){
         if(!player.hasPermission("townyspawnmenu.menu.teleport")) {
-            player.sendMessage("§6[Towny Spawn Menu] §cYou can't do that!");
+            player.sendMessage("§6[Towny Spawn Menu] §c你不能这样做！");
             return;
         }
         Town town = TownyAPI.getInstance().getTown(townName);

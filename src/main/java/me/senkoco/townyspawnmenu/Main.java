@@ -37,13 +37,13 @@ public class Main extends JavaPlugin {
         setUpConfig();
         registerCommands();
         registerListeners();
-        getLogger().info("Plugin enabled!");
+        getLogger().info("插件已启用！");
     }
 
     @Override
     public void onDisable() {
         saveConfig();
-        getLogger().info("Plugin disabled!");
+        getLogger().info("插件已禁用！");
     }
 
     public void setUpConfig(){
@@ -61,7 +61,7 @@ public class Main extends JavaPlugin {
             version = this.getDescription().getVersion();
             latestVersion = cVersion;
             if (!getVersion().equals(cVersion)) {
-                getLogger().info("You are using an older version of Towny Spawn Menu, please update to version " + cVersion);
+                getLogger().info("您正在使用旧版本的 Towny Spawn Menu，请更新到版本 " + cVersion);
                 usingOldVersion = true;
             }
         });

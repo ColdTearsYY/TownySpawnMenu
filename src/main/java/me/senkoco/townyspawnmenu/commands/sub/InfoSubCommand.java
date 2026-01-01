@@ -12,7 +12,7 @@ public class InfoSubCommand {
 
     public static boolean execute(Player player) {
         if (!player.hasPermission("townyspawnmenu.showinfo")) {
-            player.sendMessage("§6[Towny Spawn Menu] §cYou can't do that!");
+            player.sendMessage("§6[Towny Spawn Menu] §c你不能这样做！");
             return false;
         }
         List<String> info = new LinkedList<>();
@@ -20,14 +20,14 @@ public class InfoSubCommand {
         info.add("§6§lTowny Spawn Menu " + Main.getVersion());
         String madeFor = "0.100.4.4";
         if(!townyVersion.equals(madeFor)){
-            info.add("§6Made for §lTowny " + madeFor + " §6(using §lTowny v" + townyVersion + "§6)");
+            info.add("§6专为 §lTowny " + madeFor + " 制作 §6(正在使用 §lTowny v" + townyVersion + "§6)");
         }else {
-            info.add("§6Made for §lTowny " + madeFor);
+            info.add("§6专为 §lTowny " + madeFor + " 制作");
         }
         if(Main.getUsingOldVersion()){
-            info.add("§6An update is available!");
+            info.add("§6有新版本可用！");
         }else{
-            info.add("§6You're using the latest version");
+            info.add("§6你正在使用最新版本");
         }
         info.add("§c§l=========================");
 

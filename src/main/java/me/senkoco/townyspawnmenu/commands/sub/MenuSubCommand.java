@@ -14,7 +14,7 @@ import static org.bukkit.Bukkit.getPluginManager;
 public class MenuSubCommand {
     public static boolean execute(Player player) {
         if (!player.hasPermission("townyspawnmenu.menu.open")) {
-            player.sendMessage("§6[Towny Spawn Menu] §cYou can't do that!");
+            player.sendMessage("§6[Towny Spawn Menu] §c你不能这样做！");
             return false;
         }
         List<Inventory> inventories = new LinkedList<>(Nations.getPages(TownyAPI.getInstance().getResident(player)));
